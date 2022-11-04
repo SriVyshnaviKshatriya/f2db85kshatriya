@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  p My name is Sri Vyshnavi and I am doing masters in Northwest Missouri State University.
+  button(type="button",onclick="doBump()" class="btn btn-secondary") Press Me
+  div(id="bump") Bump the count
+  script.
+    var count=0;
+    var bump=1;
+    function doBump() {
+      count = count+bump;
+      bump++;
+      document.getElementById("bump").innerHTML=`Count ${count} with bump ${bump}`
+      }
+
+  a(href="/employee") go to employee 
