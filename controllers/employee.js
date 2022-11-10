@@ -2,14 +2,14 @@ var Employee = require('../models/employee');
 // List of all employees
 exports.employee_list = async function(req, res) {
     try{
-    theEmployees = await Employee.find();
+    theEmployees = await employee.find();
     res.send(theEmployees);
     }
     catch(err){
     res.status(500);
     res.send(`{"error": ${err}}`);
     }
-    };
+ };
 // for a specific Employee.
 exports.employee_detail = async function (req, res) {
     console.log("detail" + req.params.id)
@@ -30,9 +30,9 @@ exports.employee_create_post = async function (req, res) {
     // Even though bodies can be in many different formats, we will be picky
     // and require that it be a json object
     
-    document.Employee_Name = req.body.Employee_Name;
-    document.Employee_age = req.body.Employee_age;
-    document.Employee_salary = req.body.Employee_salary;
+    document.employee_Name = req.body.employee_Name;
+    document.employee_age = req.body.employee_age;
+    document.employee_salary = req.body.employee_salary;
     try {
         let result = await document.save();
         res.send(result);
@@ -62,9 +62,9 @@ exports.employee_update_put = async function (req, res) {
     try {
         let toUpdate = await employee.findById(req.params.id)
         // Do updates of properties
-        if (req.body.Employee_Name) toUpdate.Employee_Name = req.body.Employee_Name;
-        if (req.body.Employee_age) toUpdate.Employee_age = req.body.Employee_age;
-        if (req.body.Employee_salary) toUpdate.Employee_salary = req.body.Employee_salary;
+        if (req.body.employee_Name) toUpdate.employee_Name = req.body.employee_Name;
+        if (req.body.employee_age) toUpdate.employee_age = req.body.employee_age;
+        if (req.body.employee_salary) toUpdate.employee_salary = req.body.employee_salary;
         let result = await toUpdate.save();
         console.log("Sucess " + result)
         res.send(result)
@@ -79,8 +79,8 @@ exports.employee_update_put = async function (req, res) {
 // Handle a show all view
 exports.employee_view_all_Page = async function (req, res) {
     try {
-        theemployees = await employee.find();
-        res.render('employee', { title: 'employee Search Results', results: theemployees });
+        theEmployees = await employee.find();
+        res.render('employee', { title: 'employee Search Results', results: theEmployees });
     }
     catch (err) {
         res.status(500);
