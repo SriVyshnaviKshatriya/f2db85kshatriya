@@ -11,11 +11,10 @@ require('dotenv').config();
 const connectionString =
   process.env.MONGO_CON
 mongoose = require('mongoose');
-mongoose.connect(connectionString,
-{
-   useNewUrlParser: true,
-   useUnifiedTopology: true
-  });
+mongoose.connect(connectionString, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
 
 var db = mongoose.connection;
 //Bind connection to error event
@@ -39,7 +38,9 @@ app.set('view engine', 'pug');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({
+  extended: false
+}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -51,12 +52,12 @@ app.use('/selector', selectorRouter);
 app.use('/resource', resourceRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -66,40 +67,45 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 // We can seed the collection if needed on server start
-async function recreateDB(){
+async function recreateDB() {
   // Delete everything
-    await employee.deleteMany();  
-    let instance1 = new
-    employee({
-      Employee_Name:"Richards Brooke", Employee_age:20,
-      Employee_salary:1000
-    });
-    instance1.save( function(err,doc) {
-        if(err) return console.error(err);
-        console.log("First object saved")
-      });
+  await employee.deleteMany();
+  let instance1 = new
+  employee({
+    Employee_Name: "Richards Brooke",
+    Employee_age: 20,
+    Employee_salary: 1000
+  });
+  instance1.save(function (err, doc) {
+    if (err) return console.error(err);
+    console.log("First object saved")
+  });
 
-      let instance2 = new
-      employee({
-        Employee_Name:"Erika Lees", Employee_age:30,
-        Employee_salary:2000
-      });
-      instance2.save( function(err,doc) {
-          if(err) return console.error(err);
-          console.log("Second object saved")
-        });
-        
-        let instance3 = new
-        employee({
-          Employee_Name:"Sathya Mamidala", Employee_age:25,
-          Employee_salary:5000
-        });
-        instance3.save( function(err,doc) {
-            if(err) return console.error(err);
-            console.log("Third object saved")
-          });
-  }
-  let reseed = true;
-  if (reseed) { recreateDB();}
+  let instance2 = new
+  employee({
+    Employee_Name: "Erika Lees",
+    Employee_age: 30,
+    Employee_salary: 2000
+  });
+  instance2.save(function (err, doc) {
+    if (err) return console.error(err);
+    console.log("Second object saved")
+  });
+
+  let instance3 = new
+  employee({
+    Employee_Name: "Sathya Mamidala",
+    Employee_age: 25,
+    Employee_salary: 5000
+  });
+  instance3.save(function (err, doc) {
+    if (err) return console.error(err);
+    console.log("Third object saved")
+  });
+}
+let reseed = true;
+if (reseed) {
+  recreateDB();
+}
 
 module.exports = app;

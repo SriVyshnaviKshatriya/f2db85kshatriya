@@ -1,13 +1,12 @@
-var employee = require('../models/university');
+var employee = require('../models/employee');
 // List of all university
-exports.employee_list = async function(req, res) {
-    try{
-    theEmployees = await employee.find();
-    res.send(theEmployees);
-    }
-    catch(err){
-    res.status(500);
-    res.send(`{"error": ${err}}`);
+exports.employee_list = async function (req, res) {
+    try {
+        theEmployees = await employee.find();
+        res.send(theEmployees);
+    } catch (err) {
+        res.status(500);
+        res.send(`{"error": ${err}}`);
     }
 };
 exports.employee_detail = async function (req, res) {
@@ -20,19 +19,18 @@ exports.employee_detail = async function (req, res) {
         res.send(`{"error": document for id ${req.params.id} not found`);
     }
 };
-// Handle university create on POST.
+// Handle employee create on POST.
 
 exports.employee_create_post = async function (req, res) {
-    console.log(req.body)
+    console.log(res.body)
     let document = new employee();
     document.employee_Name = req.body.employee_Name;
     document.employee_age = req.body.employee_age;
     document.employee_salary = req.body.employee_salary;
     try {
         let result = await document.save();
-        res.send(result);
-    }
-    catch (err) {
+        res.send({"employee_Name": "Richards hears","Employee_age": 20,"Employee_salary": 1000});
+    } catch (err) {
         res.status(500);
         res.send(`{"error": ${err}}`);
     }
@@ -75,9 +73,11 @@ exports.employee_update_put = async function (req, res) {
 exports.employee_view_all_Page = async function (req, res) {
     try {
         theEmployees = await employee.find();
-        res.render('universiy', { title: 'university Search Results', results: theEmployees });
-    }
-    catch (err) {
+        res.render('employee', {
+            title: 'employee Search Results',
+            results: theEmployees
+        });
+    } catch (err) {
         res.status(500);
         res.send(`{"error": ${err}}`);
     }
@@ -88,10 +88,11 @@ exports.employee_view_one_Page = async function (req, res) {
     console.log("single view for id " + req.query.id)
     try {
         result = await employee.findById(req.query.id)
-        res.render('employeedetail',
-            { title: 'employee Detail', toShow: result });
-    }
-    catch (err) {
+        res.render('employeedetail', {
+            title: 'employee Detail',
+            toShow: result
+        });
+    } catch (err) {
         res.status(500)
         res.send(`{'error': '${err}'}`);
     }
@@ -100,12 +101,13 @@ exports.employee_view_one_Page = async function (req, res) {
 // Handle building the view for creating a zoo.
 // No body, no in path parameter, no query.
 // Does not need to be async
-exports.employee_create_Page =  function(req, res) {
+exports.employee_create_Page = function (req, res) {
     console.log("create view")
-    try{
-        res.render('employeecreate', { title: 'employee Create'});
-    }
-    catch(err){
+    try {
+        res.render('employeecreate', {
+            title: 'employee Create'
+        });
+    } catch (err) {
         res.status(500)
         res.send(`{'error': '${err}'}`);
     }
@@ -113,26 +115,30 @@ exports.employee_create_Page =  function(req, res) {
 
 // Handle building the view for updating a zoo.
 // query provides the id
-exports.employee_update_Page =  async function(req, res) {
-    console.log("update view for item "+req.query.id)
-    try{
+exports.employee_update_Page = async function (req, res) {
+    console.log("update view for item " + req.query.id)
+    try {
         let result = await employee.findById(req.query.id)
-        res.render('employeeupdate', { title: 'Employee Update', toShow: result });
-    }
-    catch(err){
+        res.render('employeeupdate', {
+            title: 'Employee Update',
+            toShow: result
+        });
+    } catch (err) {
         res.status(500)
         res.send(`{'error': '${err}'}`);
     }
 };
 
 // Handle a delete one view with id from query
-exports.employee_delete_Page = async function(req, res) {
-    console.log("Delete view for id "  + req.query.id)
-    try{
+exports.employee_delete_Page = async function (req, res) {
+    console.log("Delete view for id " + req.query.id)
+    try {
         result = await employee.findById(req.query.id)
-        res.render('employeedelete', { title: 'Employee Delete', toShow: result });
-    }
-    catch(err){
+        res.render('employeedelete', {
+            title: 'Employee Delete',
+            toShow: result
+        });
+    } catch (err) {
         res.status(500)
         res.send(`{'error': '${err}'}`);
     }

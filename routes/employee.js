@@ -1,9 +1,8 @@
 var express = require('express');
+const employee = require('../controllers/employee');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('employee', { title: 'Search Results'});
-});
+router.get('/', employee.employee_view_all_Page);
 
 module.exports = router;
