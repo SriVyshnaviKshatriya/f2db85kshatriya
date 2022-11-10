@@ -78,6 +78,26 @@ async function recreateDB(){
         if(err) return console.error(err);
         console.log("First object saved")
       });
+
+      let instance2 = new
+      employee({
+        Employee_Name:"Erika Lees", Employee_age:30,
+        Employee_salary:2000
+      });
+      instance2.save( function(err,doc) {
+          if(err) return console.error(err);
+          console.log("Second object saved")
+        });
+        
+        let instance3 = new
+        employee({
+          Employee_Name:"Sathya Mamidala", Employee_age:25,
+          Employee_salary:5000
+        });
+        instance3.save( function(err,doc) {
+            if(err) return console.error(err);
+            console.log("Third object saved")
+          });
   }
   let reseed = true;
   if (reseed) { recreateDB();}
