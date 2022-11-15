@@ -14,11 +14,11 @@ block content
     div.row(class='mb-2')
       div.mr-1 ID is
       div #{employeeid}
-    - let actionid = "/resource/resource/employees/" + employeeid
+    - let actionid = "/resource/employees/" + employeeid
     form(id='employeeForm', action= actionid, method="PUT")
       div.form-group
-        label.employeeAttr(for='Name_of_the_employee') employee name
-        input#employeetype(type='text' name='employee_Name', value= employee_Name )
+        label.employeeAttr(for='employee_Name') employee name
+        input#employeename(type='text' name='employee_Name', value= employee_Name )
       div.form-group
         label.employeeAttr(for='employee_age') employee age
         input#employeeage(type='text' name='employee_age', value= employee_age )
