@@ -72,9 +72,9 @@ async function recreateDB() {
   await employee.deleteMany();
   let instance1 = new
   employee({
-    Employee_Name: "Richards Brooke",
-    Employee_age: 20,
-    Employee_salary: 1000
+    employee_Name: "Richards Brooke",
+    employee_age: 20,
+    employee_salary: 1000
   });
   instance1.save(function (err, doc) {
     if (err) return console.error(err);
@@ -83,9 +83,9 @@ async function recreateDB() {
 
   let instance2 = new
   employee({
-    Employee_Name: "Erika Lees",
-    Employee_age: 30,
-    Employee_salary: 2000
+    employee_Name: "Erika Lees",
+    employee_age: 30,
+    employee_salary: 2000
   });
   instance2.save(function (err, doc) {
     if (err) return console.error(err);
@@ -94,9 +94,9 @@ async function recreateDB() {
 
   let instance3 = new
   employee({
-    Employee_Name: "Sathya Mamidala",
-    Employee_age: 25,
-    Employee_salary: 5000
+    employee_Name: "Sathya Mamidala",
+    employee_age: 25,
+    employee_salary: 5000
   });
   instance3.save(function (err, doc) {
     if (err) return console.error(err);
