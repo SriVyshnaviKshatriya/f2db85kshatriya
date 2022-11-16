@@ -1,16 +1,16 @@
-extends layout
+extends layout 
 
-block content
-  h1= title
-  - let employees = results
-    div(class="container-fluid")
-    div(class="row m-1")
-      each employee,index in employees
-       - let destination = `dispatch(\"/employees/update?id=${employee._id}\")`
-        div(onclick=`buy(${index})`) #{employee["Employee_Name"]} - #{employee.Employee_age} - #{employee.Employee_salary}
-    script.
-      function dispatch(path){
-        window.location.href=path
-      }
+block content 
+    h1= title
+    div.container-fluid
+        div.row
+            each item, index in results
+                div.col-sm-2(onclick=`buy(${index})`) #{item["employee_Name"]}, #{item["employee_age"]}, #{item["employee_salary"]}
+        
+
+    script. 
+        function buy(index) {
+            alert("You purchased item " + index);
+        }
     
         
